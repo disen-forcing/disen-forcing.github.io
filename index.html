@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disen-Forcing</title>
+<meta name="description" content="Disen-Forcing: Disentangling Semantic Anchoring from Motion for Autoregressive Video Diffusion (NeurIPS 2026).">
+<meta property="og:title" content="Disen-Forcing (NeurIPS 2026)">
+<meta property="og:description" content="Disentangling Semantic Anchoring from Motion for Autoregressive Video Diffusion.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect x=%274%27 y=%276%27 width=%276%27 height=%2720%27 rx=%272%27 fill=%27%23ff8a76%27/%3E%3Crect x=%2713%27 y=%276%27 width=%276%27 height=%2720%27 rx=%272%27 fill=%27%236fa8ff%27/%3E%3Crect x=%2722%27 y=%276%27 width=%276%27 height=%2720%27 rx=%272%27 fill=%27%236fa8ff%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080b12; --bg2:#0d121c; --card:rgba(255,255,255,.035); --cardline:rgba(255,255,255,.09);
+  --fg:#e7ebf2; --muted:#97a1b3; --dim:#6b7486; --line:rgba(255,255,255,.08);
+  --anchor:#ff8a76; --working:#6fa8ff; --mix:linear-gradient(100deg,#ff8a76 0%,#c79bd8 45%,#6fa8ff 100%);
+  --sf1:rgba(111,168,255,.06); --sf2:rgba(111,168,255,.12); --sf3:rgba(111,168,255,.22);
+  --cf1:rgba(255,138,118,.06); --cf2:rgba(255,138,118,.12); --cf3:rgba(255,138,118,.22);
+  --display:"Sora",system-ui,sans-serif; --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.7;
+  background-image:radial-gradient(900px 520px at 12% -6%,rgba(255,138,118,.13),transparent 60%),radial-gradient(1000px 640px at 92% 8%,rgba(111,168,255,.16),transparent 62%);
+  background-repeat:no-repeat}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(8,11,18,.72);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:17px;text-decoration:none}
+.mark{display:inline-flex;gap:3px}.mark i{width:8px;height:18px;border-radius:2px;display:block}
+.mark i:first-child{background:var(--anchor)}.mark i:nth-child(n+2){background:var(--working);opacity:.85}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:14.5px}
+nav ul a{text-decoration:none;color:var(--muted);display:inline-block;padding:12px 6px}nav ul a:hover{color:var(--fg)}
+@media (max-width:600px){nav ul{gap:14px;font-size:13.5px}.brand .bt{display:none}}
+
+/* hero */
+.hero{text-align:center;padding:84px 0 40px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--cardline);border-radius:999px;background:var(--card);font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--muted)}
+.pill b{width:7px;height:7px;border-radius:50%;background:var(--mix)}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(44px,8vw,76px);line-height:1.05;margin:26px 0 14px;letter-spacing:-.02em;background:var(--mix);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-family:var(--display);font-weight:500;font-size:clamp(18px,2.4vw,23px);line-height:1.4;max-width:720px;margin:0 auto;text-wrap:balance}
+.authors{display:flex;flex-wrap:wrap;justify-content:center;column-gap:22px;row-gap:2px;font-size:17px;max-width:680px;margin:30px auto 0}
+.authors span{white-space:nowrap}
+.affil{color:var(--muted);font-size:14.5px;margin-top:8px}
+.market{font-size:14px;margin-top:10px;color:#e8c4bd}.market sup{color:var(--anchor)}.market a{color:var(--working);text-decoration:none}.market a:hover{text-decoration:underline}
+.links{display:flex;justify-content:center;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:999px;border:1px solid var(--cardline);background:var(--card);color:var(--muted);font-weight:500;font-size:15px;text-decoration:none}
+.btn.off{cursor:default;opacity:.75}
+a.btn{color:var(--fg)}a.btn:hover{border-color:rgba(111,168,255,.6);background:rgba(111,168,255,.1)}
+.bib{position:relative;border:1px solid var(--cardline);background:var(--card);border-radius:14px;margin-top:14px}
+.bib pre{margin:0;padding:20px 22px;overflow-x:auto;font:13px/1.65 var(--mono);color:#cfd5df}
+.bib .copy{position:absolute;top:12px;right:12px;padding:5px 12px;font-size:12px}
+@media (max-width:860px){.bib pre{padding-top:50px}}
+
+/* sections */
+section{padding:56px 0 8px}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--working);margin:0 0 6px}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.4vw,34px);line-height:1.2;margin:0 0 18px;letter-spacing:-.01em}
+h3{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.35;margin:0 0 6px}
+p{margin:0 0 12px}
+.muted{color:var(--muted)}
+.card{border:1px solid var(--cardline);background:var(--card);border-radius:16px;padding:24px}
+.ah{color:var(--anchor);font-weight:600}.wh{color:var(--working);font-weight:600}
+
+/* one-liner + stats */
+.oneliner{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.6vw,26px);line-height:1.5;max-width:900px;margin:0 0 28px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media (max-width:760px){.stats{grid-template-columns:1fr}}
+.stat .lab{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+table.mini{min-width:0;font-size:15px}table.mini th,table.mini td{padding:5px 8px}table.mini th{border-bottom:1px solid var(--line)}
+table.mini td:not(:first-child){font-family:var(--display);font-weight:500}
+table.mini tr.me td{font-weight:600;color:#fff;background:rgba(111,168,255,.12)}table.mini tr.me td:first-child{box-shadow:inset 3px 0 0 var(--working)}
+
+/* figures */
+figure{margin:16px 0 0}
+.finding figure{margin-left:-60px;width:calc(100% + 60px)}
+.finding figure + p{margin:12px 0 0 -60px;width:calc(100% + 60px);font-size:14.5px;line-height:1.6}
+figure img{width:100%;height:auto;display:block;background:#fff;border-radius:12px;padding:12px}
+figcaption{color:var(--muted);font-size:14.5px;margin-top:12px;line-height:1.6}
+figcaption b{color:var(--fg)}
+.tldr{font-size:24px;margin:0 0 14px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tri .card{padding:20px 22px}.tri b{color:#fff;font-weight:600}.nw{white-space:nowrap}.tri p{margin:0;color:#cfd5df;font-size:15.5px;line-height:1.65}
+@media (max-width:860px){.tri{grid-template-columns:1fr}}
+
+/* findings */
+.finding{display:grid;grid-template-columns:44px 1fr;gap:6px 16px;margin-top:22px}
+.finding .n{grid-row:span 2;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:15px;border:1px solid var(--cardline);background:var(--card);color:var(--fg)}
+.finding .body{min-width:0}
+
+/* video */
+video{width:100%;display:block;border-radius:12px;background:#000;border:1px solid var(--cardline)}
+.vlab{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:26px 0 10px}
+.gal{margin-top:8px}
+.demo{margin-top:34px}
+.demo h3{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--fg);margin:0 0 6px;padding-bottom:9px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:baseline}
+.demo h3 .len{color:var(--working)}
+.prompt{font-size:14.5px;color:var(--muted);font-style:italic;margin:10px 0 12px}
+.vctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 12px}
+.vbtn{font:500 13px var(--mono);color:var(--fg);background:var(--card);border:1px solid var(--cardline);border-radius:10px;padding:7px 15px;cursor:pointer}
+.vbtn:hover{border-color:rgba(111,168,255,.6);background:rgba(111,168,255,.1)}
+.speed{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--cardline);border-radius:11px;background:var(--card)}
+.speed span{font:12px var(--mono);color:var(--muted);padding:0 8px 0 6px}
+.speed button{font:12.5px var(--mono);color:var(--muted);background:none;border:0;border-radius:8px;padding:5px 10px;cursor:pointer}
+.speed button.on{background:var(--mix);color:#0b0f19;font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:860px){.tiles{grid-template-columns:repeat(2,1fr);gap:10px}.tile figcaption{font-size:11.5px;padding:5px 6px}}
+.tile{margin:0;min-width:0;border:1px solid var(--cardline);border-radius:10px;overflow:hidden;background:var(--card)}
+.tile .frame{position:relative;aspect-ratio:832/480;background:#000}
+.tile video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border:0;border-radius:0}
+.tile .pending{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.tile.missing video{display:none}.tile.missing .pending{display:flex}
+.tile figcaption{text-align:center;font-size:13px;font-weight:500;color:#c3cad8;padding:7px 8px;border-top:1px solid var(--cardline);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile.ours{border-color:rgba(111,168,255,.7);box-shadow:0 0 0 1px rgba(111,168,255,.45),0 8px 28px rgba(111,168,255,.14)}
+.tile.ours figcaption{color:#fff;font-weight:600;background:linear-gradient(100deg,rgba(255,138,118,.22),rgba(111,168,255,.22));border-top-color:rgba(111,168,255,.4)}
+
+/* table */
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 6px}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14.5px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 12px;text-align:center;white-space:nowrap}
+tbody td:first-child,thead tr:first-child th:first-child{text-align:left}
+thead th{font-weight:500;color:var(--muted)}
+thead tr:last-child th{border-bottom:1px solid var(--cardline)}
+th.grp{color:var(--fg);font-weight:600;border-bottom:1px solid var(--line)}
+td.sep,th.sep{border-left:1px solid var(--line)}
+.gp td{font-size:13px;font-style:italic;color:var(--muted);padding-top:16px}
+.sf1{background:var(--sf1)}.sf2{background:var(--sf2)}.sf3{background:var(--sf3)}
+.cf1{background:var(--cf1)}.cf2{background:var(--cf2)}.cf3{background:var(--cf3)}
+.ind{padding-left:28px}
+tr.gsep td{border-top:1px solid var(--cardline)}
+.ours td{font-weight:600;color:#fff}.sf3.ours td:first-child{box-shadow:inset 3px 0 0 var(--working)}.cf3.ours td:first-child{box-shadow:inset 3px 0 0 var(--anchor)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.note{color:var(--muted);font-size:14px;margin-top:12px}
+
+footer{margin-top:72px;border-top:1px solid var(--line);padding:28px 0 48px;color:var(--dim);font-size:13.5px;text-align:center}
+
+/* reveal */
+html.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+html.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mark"><i></i><i></i><i></i></span><span class="bt">Disen-Forcing</span></a>
+    <ul><li><a href="#diagnosis">Diagnosis</a></li><li><a href="#method">Method</a></li><li><a href="#results">Results</a></li></ul>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+
+<header class="hero">
+  <div class="pill"><b></b>NeurIPS 2026</div>
+  <h1>Disen-Forcing</h1>
+  <div class="sub">Disentangling Semantic Anchoring from Motion for Autoregressive Video Diffusion</div>
+  <div class="authors">
+    <span>Zhengyang Yu<sup>1,★</sup></span><span>Akio Hayakawa<sup>2</sup></span><span>Masato Ishii<sup>2</sup></span><span>Qingtao Yu<sup>1</sup></span>
+    <span>Xuesong Li<sup>1,3</sup></span><span>Takashi Shibuya<sup>2</sup></span><span>Yuki Mitsufuji<sup>2,4</sup></span><span>Jing Zhang<sup>1</sup></span>
+  </div>
+  <div class="affil"><sup>1</sup>Australian National University &nbsp;·&nbsp; <sup>2</sup>Sony AI &nbsp;·&nbsp; <sup>3</sup>CSIRO &nbsp;·&nbsp; <sup>4</sup>Sony Group Corporation</div>
+  <div class="market"><sup>★</sup>Zhengyang Yu is looking for research internship and full-time opportunities: <a href="mailto:zhengyang.yu@anu.edu.au">zhengyang.yu@anu.edu.au</a></div>
+  <div class="links">
+    <a class="btn" id="paperLink" href="https://arxiv.org/abs/2611.02822" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Paper</a>
+    <span class="btn off"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.7 1.2 3.4.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>Code · coming soon</span>
+    <a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>BibTeX</a>
+  </div>
+</header>
+
+<section class="reveal">
+  <figure>
+    <a href="media/teaser.png" target="_blank" rel="noopener"><img src="media/teaser.png" alt="Training dynamics of Dynamic Degree and Imaging Quality, and a 30-second qualitative comparison of Self-Forcing, Frame Sink and Disen-Forcing" width="2400" height="989"></a>
+  </figure>
+</section>
+
+<section class="reveal">
+  <h2 class="tldr">TL;DR</h2>
+  <div class="tri">
+    <div class="card"><div class="eyebrow">Diagnosis</div><p>Initial-frame tokens are not an LLM-style attention sink in AR-VDMs: long-range consistency is anchored by a <span class="ah">sparse subset of attention heads</span>, while <span class="wh">most heads</span> capture local temporal dynamics. Frame sink exposes every head to the initial frames, which makes distillation prone to collapsing motion.</p></div>
+    <div class="card"><div class="eyebrow">Method</div><p><span class="nw">Disen-Forcing</span> is a distillation-time plug-in that disentangles semantic anchoring from motion in AR-VDMs via <b>disentangled context routing</b> and <b>motion-disentangling regularization</b>.</p></div>
+    <div class="card"><div class="eyebrow">Results</div><p>On long-horizon video generation, <span class="nw">Disen-Forcing</span> improves <b>both the long-range consistency and the motion dynamics</b> of base AR-VDMs, a trade-off that <span class="nw">sink-based</span> methods fail to balance.</p></div>
+  </div>
+</section>
+
+<section id="diagnosis">
+  <div class="eyebrow">01</div>
+  <h2>Diagnosis</h2>
+
+  <div class="finding reveal">
+    <div class="n">1</div>
+    <div class="body">
+      <h3>Initial-frame tokens are not a universal attention sink</h3>
+      <p class="muted">The vast majority of heads attend predominantly to the current frame, not the initial frames.</p>
+      <figure>
+        <a href="media/sinkvalue_comparison.png" target="_blank" rel="noopener"><img src="media/sinkvalue_comparison.png" alt="Per-head attention to the initial and current frames across six AR-VDMs" width="2400" height="941"></a>
+        <figcaption>Per-head attention to the initial and current frames across AR-VDMs, averaged over 50 MovieGenBench prompts and denoising timesteps. Most heads attend predominantly to the current frame, while a sparse subset concentrates attention on the initial frame.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="finding reveal">
+    <div class="n">2</div>
+    <div class="body">
+      <h3>Initial frames sustain consistency through sparse heads</h3>
+      <p class="muted">Most heads are <span class="wh">Working Heads</span> with a local temporal pattern; a sparse minority of <span class="ah">Anchor Heads</span> attend strongly to the initial frame across AR steps.</p>
+      <figure>
+        <a href="media/head_comparison_sf_only.png" target="_blank" rel="noopener"><img src="media/head_comparison_sf_only.png" alt="Attention distributions of representative Self-Forcing heads across seven rollout steps" width="2088" height="601"></a>
+        <figcaption>Representative Self-Forcing heads across seven rollout steps, at ODE initialization (left) and after DMD (right). <span class="wh">Working Heads</span> exhibit local temporal patterns, whereas <span class="ah">Anchor Heads</span> attend persistently to the initial frame.</figcaption>
+      </figure>
+      <figure>
+        <a href="media/exp_mask_heads.png" target="_blank" rel="noopener"><img src="media/exp_mask_heads.png" alt="Masking anchor heads versus random heads: consistency metrics and frames over 5 seconds" width="2400" height="989"></a>
+        <figcaption>Masking the top 20% <span class="ah">Anchor Heads</span> leads to a sharp drop in subject/background consistency and a clear rise in imaging-quality drift, together with visible appearance drift <b>even within the 5-second training horizon</b>. Masking the same number of <span class="wh">Working Heads</span> at random yields metrics on par with the unmasked baseline and no observable drift.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="finding reveal">
+    <div class="n">3</div>
+    <div class="body">
+      <h3>Universal frame sink causes motion collapse</h3>
+      <p class="muted">In current sink-based AR-VDMs, however, the initial frames are exposed to every head. Combined with the mode-seeking DMD objective, this offers the student an easy shortcut toward high-fidelity static modes, leading it to over-condition on the initial frames at the cost of motion.</p>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="eyebrow">02</div>
+  <h2>Method</h2>
+  <p class="muted">Given an ODE-initialization model, we first perform a one-time identification of anchor heads, then distill with two complementary components.</p>
+
+  <div class="finding reveal">
+    <div class="n">A</div>
+    <div class="body">
+      <h3>Disentangled context routing</h3>
+      <figure>
+        <a href="media/context_routing.png" target="_blank" rel="noopener"><img src="media/context_routing.png" alt="Sliding window attention, sinked sliding window attention, and disentangled context routing over generation steps 6 to 8" width="2400" height="572"></a>
+        <figcaption>(a)&nbsp;Sliding window attention loses early frames as the cache rolls forward. (b)&nbsp;Sinked sliding window retains initial frames but routes the same context to all heads. (c)&nbsp;During DMD, our approach routes initial-frame context exclusively to the sparse <span class="ah">Anchor Heads</span> while the majority <span class="wh">Working Heads</span> attend only to the local sliding window, preserving the natural head specialization.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="finding reveal">
+    <div class="n">B</div>
+    <div class="body">
+      <h3>Motion-disentangling regularization</h3>
+      <figure>
+        <a href="media/motion_proxy_tracks.png" target="_blank" rel="noopener"><img src="media/motion_proxy_tracks.png" alt="Motion proxy visualization (L26H6)" loading="lazy"></a>
+      </figure>
+      <p class="muted">Routing alone cannot fully close the leakage from <span class="ah">Anchor Heads</span> into motion construction: it constrains only which context each head reads, not which aspect of the generated video each head shapes. We therefore require local motion construction to remain invariant under intervention on <span class="ah">Anchor Heads</span>' access to initial frames. Using the cross-frame self-attention map as a motion proxy, we run a counterfactual pass that replaces the anchor heads' routed context with the sliding window, and penalize the KL divergence between the two proxies in layers that contain no anchor heads.</p>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="eyebrow">03</div>
+  <h2>Results</h2>
+  <p class="muted">Self-Forcing suffers from temporal drift once the inference rollout exceeds the training horizon; Frame Sink avoids temporal drift but yields low-dynamic, conservative motion. Ours (Disen-Forcing) is both drift-free and temporally dynamic.</p>
+
+  <div class="vlab">30-second generation</div>
+  <div class="gal" data-h="30s"></div>
+  <div class="vlab" style="margin-top:46px">1-minute generation</div>
+  <div class="gal" data-h="1min"></div>
+
+  <div class="vlab">Quantitative comparison</div>
+  <div class="card tablewrap reveal">
+  <table>
+  <caption class="sr">Base models, Frame Sink and Disen-Forcing at 30 seconds and 1 minute</caption>
+  <thead>
+  <tr><th scope="col" rowspan="2">Model</th><th scope="col" class="grp sep" colspan="3">30 s</th><th scope="col" class="grp sep" colspan="3">1 min</th></tr>
+  <tr><th scope="col" class="sep">Imaging<br>Quality ↑</th><th scope="col">Dynamic<br>Degree ↑</th><th scope="col">Quality<br>Drift ↓</th><th scope="col" class="sep">Imaging<br>Quality ↑</th><th scope="col">Dynamic<br>Degree ↑</th><th scope="col">Quality<br>Drift ↓</th></tr>
+  </thead>
+  <tbody>
+  <tr class="sf1"><td>Self-Forcing</td><td class="sep">67.87</td><td>40.44</td><td>7.23</td><td class="sep">65.68</td><td>34.70</td><td>12.73</td></tr>
+  <tr class="sf2"><td class="ind">+ Frame Sink</td><td class="sep">69.94</td><td>35.66</td><td>3.40</td><td class="sep">70.34</td><td>35.83</td><td>3.10</td></tr>
+  <tr class="sf3 ours"><td class="ind">+ Disen-Forcing</td><td class="sep">70.05</td><td>73.12</td><td>4.03</td><td class="sep">70.01</td><td>73.95</td><td>4.04</td></tr>
+  <tr class="cf1 gsep"><td>Causal-Forcing</td><td class="sep">65.75</td><td>68.28</td><td>9.38</td><td class="sep">62.57</td><td>64.91</td><td>12.96</td></tr>
+  <tr class="cf2"><td class="ind">+ Frame Sink</td><td class="sep">71.45</td><td>17.75</td><td>3.25</td><td class="sep">71.51</td><td>16.06</td><td>3.66</td></tr>
+  <tr class="cf3 ours"><td class="ind">+ Disen-Forcing</td><td class="sep">69.77</td><td>69.72</td><td>4.83</td><td class="sep">68.96</td><td>69.64</td><td>5.10</td></tr>
+  </tbody>
+  </table>
+  </div>
+</section>
+
+
+<section id="bibtex">
+  <h2>BibTeX</h2>
+  <div class="bib"><button type="button" class="vbtn copy" id="copyBib">Copy</button><pre id="bibText">@article{yu2026disenforcing,
+  title={Disen-Forcing: Disentangling Semantic Anchoring from Motion for Autoregressive Video Diffusion},
+  author={Yu, Zhengyang and Hayakawa, Akio and Ishii, Masato and Yu, Qingtao and Li, Xuesong and Shibuya, Takashi and Mitsufuji, Yuki and Zhang, Jing},
+  journal={arXiv preprint arXiv:2611.02822},
+  year={2026}
+}</pre></div>
+</section>
+
+</main>
+<footer><div class="wrap">Disen-Forcing · NeurIPS 2026</div></footer>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+(function(){
+  var MODELS=[['rolling','Rolling Forcing'],['longlive','LongLive'],['deepforcing','Deep Forcing'],
+    ['sf','Self-Forcing'],['sink','Self-Forcing + Frame Sink'],['disen','Self-Forcing + Disen-Forcing']];
+  var DEMOS={
+    '30s':[['astronaut','Demo 1','An astronaut runs on the surface of the moon, the low angle shot shows the vast background of the moon, the movement is smooth and appears lightweight.'],
+      ['horse','Demo 2','A horse accelerating out of the starting gate at the beginning of a race.'],
+      ['mg0844','Demo 3','A handheld shot following a child running through a field of tall grass, capturing the spontaneity and playfulness of their movements.']],
+    '1min':[['bear','Demo 1','A bear wearing a superhero cape, flying through the sky over a bustling city.'],
+      ['chimp','Demo 2','A chimp on the sidewalk doing a backflip on a skateboard.'],
+      ['woman','Demo 3','A stylish woman walks down a Tokyo street filled with warm glowing neon and animated city signage. She wears a black leather jacket, a long red dress, …']]
+  };
+  var MEDIA_V='20261102e'; // bump when tiles are replaced so browsers refetch
+  var LEN={'30s':'30 s','1min':'1 min'},groups=[];
+  function makeGroup(h,d){
+    var g=document.createElement('div');g.className='demo';
+    g.innerHTML='<h3><span class="len">'+LEN[h]+'</span>'+d[1]+'</h3>'+(d[2]?'<p class="prompt">\u201c'+d[2]+'\u201d</p>':'<p class="prompt"></p>')+
+      '<div class="vctl"><button type="button" class="vbtn play">\u25b6 Play</button><button type="button" class="vbtn restart">\u21bb Restart</button>'+
+      '<div class="speed" role="group" aria-label="Playback speed"><span>Speed</span><button type="button" data-s="1" class="on">1\u00d7</button><button type="button" data-s="1.5">1.5\u00d7</button><button type="button" data-s="2">2\u00d7</button></div></div><div class="tiles"></div>';
+    var tiles=g.querySelector('.tiles'),st={paused:true,speed:1,vids:[]},play=g.querySelector('.play');
+    MODELS.forEach(function(m){
+      var f=document.createElement('figure');f.className='tile'+(m[0]==='disen'?' ours':'');
+      f.innerHTML='<div class="frame"><video muted loop playsinline preload="metadata"></video><div class="pending">Coming soon</div></div><figcaption>'+m[1]+'</figcaption>';
+      var v=f.querySelector('video'),base='media/demos/'+h+'/'+d[0]+'/'+m[0];
+      v.setAttribute('aria-label',m[1]+', '+d[1]);
+      v.addEventListener('error',function(){f.classList.add('missing')});
+      v.addEventListener('play',function(){v.playbackRate=st.speed});
+      v.poster=base+'.png?v='+MEDIA_V;v.src=base+'.mp4?v='+MEDIA_V;
+      tiles.appendChild(f);st.vids.push(v);
+    });
+    function live(){return st.vids.filter(function(v){return !v.closest('.tile').classList.contains('missing')})}
+    function label(){play.textContent=st.paused?'\u25b6 Play':'\u275a\u275a Pause'}
+    st.start=function(){var vs=live();if(!vs.length)return;var t=vs[vs.length-1].currentTime;vs.forEach(function(v){v.currentTime=t;v.play().catch(function(){})})};
+    st.stop=function(){st.vids.forEach(function(v){v.pause()})};
+    play.addEventListener('click',function(){st.paused=!st.paused;st.paused?st.stop():st.start();label()});
+    g.querySelector('.restart').addEventListener('click',function(){live().forEach(function(v){v.currentTime=0});if(!st.paused)st.start()});
+    g.querySelectorAll('.speed button').forEach(function(b){b.addEventListener('click',function(){
+      st.speed=parseFloat(b.dataset.s);st.vids.forEach(function(v){v.playbackRate=st.speed});
+      g.querySelectorAll('.speed button').forEach(function(o){o.classList.toggle('on',o===b)});
+    })});
+    // keep tiles in step with the Disen tile while playing
+    var lead=st.vids[st.vids.length-1];
+    lead.addEventListener('timeupdate',function(){if(st.paused)return;live().forEach(function(v){if(v!==lead&&Math.abs(v.currentTime-lead.currentTime)>0.25&&v.duration>lead.currentTime)v.currentTime=lead.currentTime})});
+    st.el=g;groups.push(st);label();
+    return g;
+  }
+  var cb=document.getElementById('copyBib');
+  if(cb)cb.addEventListener('click',function(){
+    var t=document.getElementById('bibText').textContent;
+    function done(){cb.textContent='Copied';setTimeout(function(){cb.textContent='Copy'},1600)}
+    if(navigator.clipboard)navigator.clipboard.writeText(t).then(done,function(){});
+  });
+  document.querySelectorAll('.gal').forEach(function(box){DEMOS[box.dataset.h].forEach(function(d){box.appendChild(makeGroup(box.dataset.h,d))})});
+  // play only while on screen
+  if('IntersectionObserver' in window){
+    var vio=new IntersectionObserver(function(es){es.forEach(function(e){
+      var st=groups.filter(function(x){return x.el===e.target})[0];
+      if(!e.isIntersecting)st.stop();else if(!st.paused)st.start();
+    })},{threshold:.15});
+    groups.forEach(function(st){vio.observe(st.el)});
+  }
+})();
+</script>
+</body>
+</html>
