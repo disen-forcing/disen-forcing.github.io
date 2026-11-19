@@ -1,0 +1,285 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2010 540" width="2010" height="540">
+<rect x="6" y="8" width="1996" height="92" fill="none" stroke="#e7ebf2" stroke-width="2" stroke-dasharray="8 6" opacity=".8"/>
+<rect x="26" y="24" width="62" height="62" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="190.2" y="50" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Sliding Window</text>
+<text x="190.2" y="81" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Context</text>
+<rect x="356.64" y="24" width="62" height="62" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="514.54" y="50" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Initial Frame</text>
+<text x="514.54" y="81" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Context</text>
+<rect x="674.68" y="24" width="62" height="62" fill="#d5f5ef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="832.5799999999999" y="50" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Current Frame</text>
+<text x="832.5799999999999" y="81" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Tokens</text>
+<rect x="992.7199999999999" y="24" width="62" height="62" fill="#bfbfbf" stroke="#1a1f2b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="1112.8199999999997" y="50" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Evicted</text>
+<text x="1112.8199999999997" y="81" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Context</text>
+<rect x="1235.1599999999999" y="24" width="62" height="62" fill="#d6e6fb" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1443.4599999999998" y="50" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Current Frame Tokens</text>
+<text x="1443.4599999999998" y="81" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">(major Working Heads)</text>
+<rect x="1653.9999999999998" y="24" width="62" height="62" fill="#f9d9d4" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1855.9999999999998" y="50" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Current Frame Tokens</text>
+<text x="1855.9999999999998" y="81" font-family="'Times New Roman',Times,serif" font-size="27" text-anchor="middle" fill="#e7ebf2" font-weight="normal">(minor Anchor Heads)</text>
+<text x="62" y="176" font-family="'Times New Roman',Times,serif" font-size="26" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Generating</text>
+<text x="62" y="208" font-family="'Times New Roman',Times,serif" font-size="26" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Frame 6</text>
+<text x="62" y="301" font-family="'Times New Roman',Times,serif" font-size="26" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Generating</text>
+<text x="62" y="333" font-family="'Times New Roman',Times,serif" font-size="26" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Frame 7</text>
+<text x="62" y="426" font-family="'Times New Roman',Times,serif" font-size="26" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Generating</text>
+<text x="62" y="458" font-family="'Times New Roman',Times,serif" font-size="26" text-anchor="middle" fill="#e7ebf2" font-weight="normal">Frame 8</text>
+<rect x="138" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="170.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">0</text>
+<rect x="202" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="234.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">1</text>
+<rect x="266" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="298.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">2</text>
+<rect x="330" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="362.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">3</text>
+<rect x="394" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="426.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">4</text>
+<rect x="458" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="490.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">5</text>
+<rect x="522" y="150" width="64" height="64" fill="#d5f5ef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="554.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">6</text>
+<path d="M550.8 150 C493.2 109.75200000000001, 224.4 109.75200000000001, 170.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M167.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M550.8 150 C502.79999999999995 115.16, 278.8 115.16, 234.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M231.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M550.8 150 C512.4 120.568, 333.2 120.568, 298.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M295.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M550.8 150 C522.0 125.976, 387.6 125.976, 362.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M359.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M550.8 150 C531.5999999999999 131.38400000000001, 442.0 131.38400000000001, 426.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M423.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M550.8 150 C541.1999999999999 136.792, 496.4 136.792, 490.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M487.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<rect x="138" y="275" width="64" height="64" fill="#bfbfbf" stroke="#1a1f2b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="170.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">0</text>
+<rect x="202" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="234.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">1</text>
+<rect x="266" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="298.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">2</text>
+<rect x="330" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="362.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">3</text>
+<rect x="394" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="426.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">4</text>
+<rect x="458" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="490.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">5</text>
+<rect x="522" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="554.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">6</text>
+<rect x="586" y="275" width="64" height="64" fill="#d5f5ef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="618.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">7</text>
+<path d="M614.8 275 C557.1999999999999 234.752, 288.4 234.752, 234.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M231.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M614.8 275 C566.8 240.16, 342.8 240.16, 298.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M295.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M614.8 275 C576.4 245.568, 397.2 245.568, 362.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M359.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M614.8 275 C586.0 250.976, 451.6 250.976, 426.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M423.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M614.8 275 C595.5999999999999 256.384, 506.0 256.384, 490.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M487.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M614.8 275 C605.1999999999999 261.792, 560.4 261.792, 554.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M551.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<rect x="138" y="400" width="64" height="64" fill="#bfbfbf" stroke="#1a1f2b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="170.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">0</text>
+<rect x="202" y="400" width="64" height="64" fill="#bfbfbf" stroke="#1a1f2b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="234.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">1</text>
+<rect x="266" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="298.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">2</text>
+<rect x="330" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="362.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">3</text>
+<rect x="394" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="426.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">4</text>
+<rect x="458" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="490.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">5</text>
+<rect x="522" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="554.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">6</text>
+<rect x="586" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="618.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">7</text>
+<rect x="650" y="400" width="64" height="64" fill="#d5f5ef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="682.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">8</text>
+<path d="M678.8 400 C621.1999999999999 359.752, 352.4 359.752, 298.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M295.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M678.8 400 C630.8 365.16, 406.8 365.16, 362.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M359.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M678.8 400 C640.4 370.568, 461.2 370.568, 426.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M423.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M678.8 400 C650.0 375.976, 515.6 375.976, 490.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M487.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M678.8 400 C659.5999999999999 381.384, 570.0 381.384, 554.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M551.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M678.8 400 C669.1999999999999 386.792, 624.4 386.792, 618.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M615.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<text x="428" y="522" font-family="'Times New Roman',Times,serif" font-size="36" text-anchor="middle" fill="#e7ebf2" font-weight="normal">(a) Sliding Window Attention</text>
+<rect x="737" y="150" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="769.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">0</text>
+<rect x="801" y="150" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="833.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">1</text>
+<rect x="865" y="150" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="897.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">2</text>
+<rect x="929" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="961.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">3</text>
+<rect x="993" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1025.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">4</text>
+<rect x="1057" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1089.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">5</text>
+<rect x="1121" y="150" width="64" height="64" fill="#d5f5ef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1153.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">6</text>
+<path d="M1149.8 150 C1092.2 109.752, 823.4 109.752, 769.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M766.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1149.8 150 C1101.8 115.16, 877.8 115.16, 833.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M830.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1149.8 150 C1111.3999999999999 120.568, 932.1999999999999 120.568, 897.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M894.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1149.8 150 C1121.0 125.976, 986.5999999999999 125.976, 961.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M958.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1149.8 150 C1130.6 131.38400000000001, 1041.0 131.38400000000001, 1025.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M1022.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1149.8 150 C1140.2 136.792, 1095.3999999999999 136.792, 1089.8 147" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M1086.8 149 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<rect x="737" y="275" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="769.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">0</text>
+<rect x="801" y="275" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="833.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">1</text>
+<rect x="865" y="275" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="897.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">2</text>
+<rect x="929" y="275" width="64" height="64" fill="#bfbfbf" stroke="#1a1f2b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="961.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">3</text>
+<rect x="993" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1025.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">4</text>
+<rect x="1057" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1089.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">5</text>
+<rect x="1121" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1153.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">6</text>
+<rect x="1185" y="275" width="64" height="64" fill="#d5f5ef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1217.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">7</text>
+<path d="M1213.8 275 C1146.6 229.344, 833.0 229.344, 769.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M766.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1213.8 275 C1156.2 234.752, 887.4 234.752, 833.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M830.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1213.8 275 C1165.8 240.16, 941.8 240.16, 897.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M894.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1213.8 275 C1185.0 250.976, 1050.6 250.976, 1025.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M1022.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1213.8 275 C1194.6 256.384, 1105.0 256.384, 1089.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M1086.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1213.8 275 C1204.2 261.792, 1159.3999999999999 261.792, 1153.8 272" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M1150.8 274 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<rect x="737" y="400" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="769.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">0</text>
+<rect x="801" y="400" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="833.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">1</text>
+<rect x="865" y="400" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="897.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">2</text>
+<rect x="929" y="400" width="64" height="64" fill="#bfbfbf" stroke="#1a1f2b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="961.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">3</text>
+<rect x="993" y="400" width="64" height="64" fill="#bfbfbf" stroke="#1a1f2b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="1025.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">4</text>
+<rect x="1057" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1089.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">5</text>
+<rect x="1121" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1153.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">6</text>
+<rect x="1185" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1217.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">7</text>
+<rect x="1249" y="400" width="64" height="64" fill="#d5f5ef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1281.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">8</text>
+<path d="M1277.8 400 C1201.0 348.936, 842.5999999999999 348.936, 769.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M766.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1277.8 400 C1210.6 354.344, 897.0 354.344, 833.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M830.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1277.8 400 C1220.2 359.752, 951.4 359.752, 897.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M894.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1277.8 400 C1249.0 375.976, 1114.6 375.976, 1089.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M1086.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1277.8 400 C1258.6 381.384, 1169.0 381.384, 1153.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M1150.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<path d="M1277.8 400 C1268.2 386.792, 1223.3999999999999 386.792, 1217.8 397" fill="none" stroke="#e7ebf2" stroke-width="2.6"/>
+<path d="M1214.8 399 l11 -4 l-5 -7 z" fill="#e7ebf2"/>
+<text x="1027" y="522" font-family="'Times New Roman',Times,serif" font-size="36" text-anchor="middle" fill="#e7ebf2" font-weight="normal">(b) Sinked Sliding Window Attention</text>
+<rect x="1345" y="150" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1377.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">0</text>
+<rect x="1409" y="150" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1441.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">1</text>
+<rect x="1473" y="150" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1505.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">2</text>
+<rect x="1537" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1569.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">3</text>
+<rect x="1601" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1633.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">4</text>
+<rect x="1665" y="150" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1697.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">5</text>
+<rect x="1729" y="150" width="50" height="64" fill="#d6e6fb" stroke="#1a1f2b" stroke-width="2"/>
+<rect x="1779" y="150" width="14" height="64" fill="#f9d9d4" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1754.0" y="195" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">6</text>
+<path d="M1786 150 C1724.17 107.36909999999999, 1435.6299999999999 107.36909999999999, 1377.8 147" fill="none" stroke="#ff8a76" stroke-width="2.6"/>
+<path d="M1374.8 149 l11 -4 l-5 -7 z" fill="#ff8a76"/>
+<path d="M1786 150 C1733.77 112.77709999999999, 1490.03 112.77709999999999, 1441.8 147" fill="none" stroke="#ff8a76" stroke-width="2.6"/>
+<path d="M1438.8 149 l11 -4 l-5 -7 z" fill="#ff8a76"/>
+<path d="M1786 150 C1743.37 118.18509999999999, 1544.43 118.18509999999999, 1505.8 147" fill="none" stroke="#ff8a76" stroke-width="2.6"/>
+<path d="M1502.8 149 l11 -4 l-5 -7 z" fill="#ff8a76"/>
+<path d="M1757.8 150 C1729.0 125.976, 1594.6 125.976, 1569.8 147" fill="none" stroke="#6fa8ff" stroke-width="2.6"/>
+<path d="M1566.8 149 l11 -4 l-5 -7 z" fill="#6fa8ff"/>
+<path d="M1757.8 150 C1738.6 131.38400000000001, 1649.0 131.38400000000001, 1633.8 147" fill="none" stroke="#6fa8ff" stroke-width="2.6"/>
+<path d="M1630.8 149 l11 -4 l-5 -7 z" fill="#6fa8ff"/>
+<path d="M1757.8 150 C1748.2 136.792, 1703.3999999999999 136.792, 1697.8 147" fill="none" stroke="#6fa8ff" stroke-width="2.6"/>
+<path d="M1694.8 149 l11 -4 l-5 -7 z" fill="#6fa8ff"/>
+<rect x="1345" y="275" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1377.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">0</text>
+<rect x="1409" y="275" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1441.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">1</text>
+<rect x="1473" y="275" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1505.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">2</text>
+<rect x="1537" y="275" width="64" height="64" fill="#bfbfbf" stroke="#1a1f2b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="1569.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">3</text>
+<rect x="1601" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1633.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">4</text>
+<rect x="1665" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1697.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">5</text>
+<rect x="1729" y="275" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1761.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">6</text>
+<rect x="1793" y="275" width="50" height="64" fill="#d6e6fb" stroke="#1a1f2b" stroke-width="2"/>
+<rect x="1843" y="275" width="14" height="64" fill="#f9d9d4" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1818.0" y="320" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">7</text>
+<path d="M1850 275 C1778.57 226.9611, 1445.23 226.9611, 1377.8 272" fill="none" stroke="#ff8a76" stroke-width="2.6"/>
+<path d="M1374.8 274 l11 -4 l-5 -7 z" fill="#ff8a76"/>
+<path d="M1850 275 C1788.17 232.3691, 1499.6299999999999 232.3691, 1441.8 272" fill="none" stroke="#ff8a76" stroke-width="2.6"/>
+<path d="M1438.8 274 l11 -4 l-5 -7 z" fill="#ff8a76"/>
+<path d="M1850 275 C1797.77 237.7771, 1554.03 237.7771, 1505.8 272" fill="none" stroke="#ff8a76" stroke-width="2.6"/>
+<path d="M1502.8 274 l11 -4 l-5 -7 z" fill="#ff8a76"/>
+<path d="M1821.8 275 C1793.0 250.976, 1658.6 250.976, 1633.8 272" fill="none" stroke="#6fa8ff" stroke-width="2.6"/>
+<path d="M1630.8 274 l11 -4 l-5 -7 z" fill="#6fa8ff"/>
+<path d="M1821.8 275 C1802.6 256.384, 1713.0 256.384, 1697.8 272" fill="none" stroke="#6fa8ff" stroke-width="2.6"/>
+<path d="M1694.8 274 l11 -4 l-5 -7 z" fill="#6fa8ff"/>
+<path d="M1821.8 275 C1812.2 261.792, 1767.3999999999999 261.792, 1761.8 272" fill="none" stroke="#6fa8ff" stroke-width="2.6"/>
+<path d="M1758.8 274 l11 -4 l-5 -7 z" fill="#6fa8ff"/>
+<rect x="1345" y="400" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1377.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">0</text>
+<rect x="1409" y="400" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1441.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">1</text>
+<rect x="1473" y="400" width="64" height="64" fill="#f47a7a" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1505.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">2</text>
+<rect x="1537" y="400" width="64" height="64" fill="#bfbfbf" stroke="#1a1f2b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="1569.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">3</text>
+<rect x="1601" y="400" width="64" height="64" fill="#bfbfbf" stroke="#1a1f2b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="1633.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">4</text>
+<rect x="1665" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1697.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">5</text>
+<rect x="1729" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1761.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">6</text>
+<rect x="1793" y="400" width="64" height="64" fill="#5b9bef" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1825.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">7</text>
+<rect x="1857" y="400" width="50" height="64" fill="#d6e6fb" stroke="#1a1f2b" stroke-width="2"/>
+<rect x="1907" y="400" width="14" height="64" fill="#f9d9d4" stroke="#1a1f2b" stroke-width="2"/>
+<text x="1882.0" y="445" font-family="'Times New Roman',Times,serif" font-size="34" text-anchor="middle" fill="#111" font-weight="normal">8</text>
+<path d="M1914 400 C1832.97 346.5531, 1454.83 346.5531, 1377.8 397" fill="none" stroke="#ff8a76" stroke-width="2.6"/>
+<path d="M1374.8 399 l11 -4 l-5 -7 z" fill="#ff8a76"/>
+<path d="M1914 400 C1842.57 351.9611, 1509.23 351.9611, 1441.8 397" fill="none" stroke="#ff8a76" stroke-width="2.6"/>
+<path d="M1438.8 399 l11 -4 l-5 -7 z" fill="#ff8a76"/>
+<path d="M1914 400 C1852.17 357.3691, 1563.6299999999999 357.3691, 1505.8 397" fill="none" stroke="#ff8a76" stroke-width="2.6"/>
+<path d="M1502.8 399 l11 -4 l-5 -7 z" fill="#ff8a76"/>
+<path d="M1885.8 400 C1857.0 375.976, 1722.6 375.976, 1697.8 397" fill="none" stroke="#6fa8ff" stroke-width="2.6"/>
+<path d="M1694.8 399 l11 -4 l-5 -7 z" fill="#6fa8ff"/>
+<path d="M1885.8 400 C1866.6 381.384, 1777.0 381.384, 1761.8 397" fill="none" stroke="#6fa8ff" stroke-width="2.6"/>
+<path d="M1758.8 399 l11 -4 l-5 -7 z" fill="#6fa8ff"/>
+<path d="M1885.8 400 C1876.2 386.792, 1831.3999999999999 386.792, 1825.8 397" fill="none" stroke="#6fa8ff" stroke-width="2.6"/>
+<path d="M1822.8 399 l11 -4 l-5 -7 z" fill="#6fa8ff"/>
+<text x="1635" y="522" font-family="'Times New Roman',Times,serif" font-size="36" text-anchor="middle" fill="#e7ebf2" font-weight="bold">(c) Disentangled Context Routing (ours)</text>
+</svg>

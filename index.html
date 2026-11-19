@@ -82,6 +82,7 @@ figure{margin:16px 0 0}
 .finding figure{margin-left:-60px;width:calc(100% + 60px)}
 .finding figure + p{margin:12px 0 0 -60px;width:calc(100% + 60px);font-size:14.5px;line-height:1.6}
 figure img{width:100%;height:auto;display:block;background:#fff;border-radius:12px;padding:12px}
+figure img.photo{background:none;padding:0}
 figcaption{color:var(--muted);font-size:14.5px;margin-top:12px;line-height:1.6}
 figcaption b{color:var(--fg)}
 .tldr{font-size:24px;margin:0 0 14px}
@@ -219,7 +220,7 @@ html.js .reveal.in{opacity:1;transform:none}
       <h3>Initial-frame tokens are not a universal attention sink</h3>
       <p class="muted">The vast majority of heads attend predominantly to the current frame, not the initial frames.</p>
       <figure>
-        <a href="media/sinkvalue_comparison.png" target="_blank" rel="noopener"><img src="media/sinkvalue_comparison.png" alt="Per-head attention to the initial and current frames across six AR-VDMs" width="2400" height="941"></a>
+        <a href="media/sinkvalue_comparison_dark.png" target="_blank" rel="noopener"><img class="photo" src="media/sinkvalue_comparison_dark.png" alt="Per-head attention to the initial and current frames across six AR-VDMs" width="2400" height="941"></a>
         <figcaption>Per-head attention to the initial and current frames across AR-VDMs, averaged over 50 MovieGenBench prompts and denoising timesteps. Most heads attend predominantly to the current frame, while a sparse subset concentrates attention on the initial frame.</figcaption>
       </figure>
     </div>
@@ -231,11 +232,11 @@ html.js .reveal.in{opacity:1;transform:none}
       <h3>Initial frames sustain consistency through sparse heads</h3>
       <p class="muted">Most heads are <span class="wh">Working Heads</span> with a local temporal pattern; a sparse minority of <span class="ah">Anchor Heads</span> attend strongly to the initial frame across AR steps.</p>
       <figure>
-        <a href="media/head_comparison_sf_only.png" target="_blank" rel="noopener"><img src="media/head_comparison_sf_only.png" alt="Attention distributions of representative Self-Forcing heads across seven rollout steps" width="2088" height="601"></a>
+        <a href="media/head_comparison_sf_only_dark.png" target="_blank" rel="noopener"><img class="photo" src="media/head_comparison_sf_only_dark.png" alt="Attention distributions of representative Self-Forcing heads across seven rollout steps" width="2400" height="692"></a>
         <figcaption>Representative Self-Forcing heads across seven rollout steps, at ODE initialization (left) and after DMD (right). <span class="wh">Working Heads</span> exhibit local temporal patterns, whereas <span class="ah">Anchor Heads</span> attend persistently to the initial frame.</figcaption>
       </figure>
       <figure>
-        <a href="media/exp_mask_heads.png" target="_blank" rel="noopener"><img src="media/exp_mask_heads.png" alt="Masking anchor heads versus random heads: consistency metrics and frames over 5 seconds" width="2400" height="989"></a>
+        <a href="media/exp_mask_heads_dark.png" target="_blank" rel="noopener"><img class="photo" src="media/exp_mask_heads_dark.png" alt="Masking anchor heads versus random heads: consistency metrics and frames over 5 seconds" width="2400" height="1044"></a>
         <figcaption>Masking the top 20% <span class="ah">Anchor Heads</span> leads to a sharp drop in subject/background consistency and a clear rise in imaging-quality drift, together with visible appearance drift <b>even within the 5-second training horizon</b>. Masking the same number of <span class="wh">Working Heads</span> at random yields metrics on par with the unmasked baseline and no observable drift.</figcaption>
       </figure>
     </div>
@@ -260,7 +261,7 @@ html.js .reveal.in{opacity:1;transform:none}
     <div class="body">
       <h3>Disentangled context routing</h3>
       <figure>
-        <a href="media/context_routing.png" target="_blank" rel="noopener"><img src="media/context_routing.png" alt="Sliding window attention, sinked sliding window attention, and disentangled context routing over generation steps 6 to 8" width="2400" height="572"></a>
+        <a href="media/context_routing.svg" target="_blank" rel="noopener"><img class="photo" src="media/context_routing.svg" alt="Sliding window attention, sinked sliding window attention, and disentangled context routing over generation steps 6 to 8" width="2400" height="572"></a>
         <figcaption>(a)&nbsp;Sliding window attention loses early frames as the cache rolls forward. (b)&nbsp;Sinked sliding window retains initial frames but routes the same context to all heads. (c)&nbsp;During DMD, our approach routes initial-frame context exclusively to the sparse <span class="ah">Anchor Heads</span> while the majority <span class="wh">Working Heads</span> attend only to the local sliding window, preserving the natural head specialization.</figcaption>
       </figure>
     </div>
@@ -271,7 +272,7 @@ html.js .reveal.in{opacity:1;transform:none}
     <div class="body">
       <h3>Motion-disentangling regularization</h3>
       <figure>
-        <a href="media/motion_proxy_tracks.png" target="_blank" rel="noopener"><img src="media/motion_proxy_tracks.png" alt="Motion proxy visualization (L26H6)" loading="lazy"></a>
+        <a href="media/motion_proxy_tracks.png" target="_blank" rel="noopener"><img class="photo" src="media/motion_proxy_tracks.png" alt="Motion proxy visualization (L26H6)" loading="lazy"></a>
       </figure>
       <p class="muted">Routing alone cannot fully close the leakage from <span class="ah">Anchor Heads</span> into motion construction: it constrains only which context each head reads, not which aspect of the generated video each head shapes. We therefore require local motion construction to remain invariant under intervention on <span class="ah">Anchor Heads</span>' access to initial frames. Using the cross-frame self-attention map as a motion proxy, we run a counterfactual pass that replaces the anchor heads' routed context with the sliding window, and penalize the KL divergence between the two proxies in layers that contain no anchor heads.</p>
     </div>
