@@ -221,12 +221,8 @@ html.js .reveal.in{opacity:1;transform:none}
       <h3>Initial-frame tokens are not a universal attention sink</h3>
       <p class="muted">The vast majority of heads attend predominantly to the current frame, not the initial frames.</p>
       <figure>
-        <a href="media/llm_sink_pairs_dark.png" target="_blank" rel="noopener"><img class="photo" src="media/llm_sink_pairs_dark.png" alt="Per-head attention to the first token and to recent tokens in Qwen3-4B, Llama-3.1-8B and Phi-4-mini" width="2400" height="552"></a>
-        <figcaption>For comparison, LLMs show a universal attention sink: beyond the first few layers, nearly every head attends heavily to the first token.</figcaption>
-      </figure>
-      <figure>
-        <a href="media/sinkvalue_comparison_dark.png" target="_blank" rel="noopener"><img class="photo" src="media/sinkvalue_comparison_dark.png" alt="Per-head attention to the initial and current frames across six AR-VDMs" width="2400" height="941"></a>
-        <figcaption>Per-head attention to the initial and current frames across AR-VDMs, averaged over 50 MovieGenBench prompts and denoising timesteps. Most heads attend predominantly to the current frame, while a sparse subset concentrates attention on the initial frame.</figcaption>
+        <a href="media/sink_comparison_llm_arvdm_dark.png" target="_blank" rel="noopener"><img class="photo" src="media/sink_comparison_llm_arvdm_dark.png" alt="Per-head attention in LLMs (Qwen3-4B, Llama-3.1-8B, Phi-4-mini) and AR-VDMs (Self-Forcing, Causal-Forcing, LongLive)" width="2400" height="1278"></a>
+        <figcaption>Per-head attention in LLMs (top) and AR-VDMs (bottom). In LLMs most heads attend heavily to the first token. In AR-VDMs most heads attend to the current frame, and only a sparse subset attends to the initial frame.</figcaption>
       </figure>
     </div>
   </div>
